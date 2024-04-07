@@ -167,6 +167,8 @@ public abstract class BaseExecutor implements Executor {
       }
       // issue #601
       deferredLoads.clear();
+      //如果 localCacheScope 的类型是 Statement，则每次查询之后，都会清理缓存
+      //在分布式环境下，务必将localCache设置为STATEMENT，避免其他节点执行SQL更新语句之后，本节点缓存得不到刷新而导致数据一致性的问题。
       if (configuration.getLocalCacheScope() == LocalCacheScope.STATEMENT) {
         // issue #482
         clearLocalCache();

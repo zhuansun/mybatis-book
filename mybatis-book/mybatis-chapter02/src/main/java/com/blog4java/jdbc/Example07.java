@@ -34,12 +34,10 @@ public class Example07 {
     public void testJdbc() {
         try {
             Class.forName("org.hsqldb.jdbcDriver");
-            // 获取Connection对象
-            Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:mybatis",
-                    "sa", "");
+            Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:mybatis", "sa", "");
             Statement stmt = conn.createStatement();
-            String sql = "insert into user(create_time, name, password, phone, nick_name) " +
-                    "values('2010-10-24 10:20:30','User1','test','18700001111','User1');";
+            String sql = "insert into user(create_time, name, password, phone, nick_name) values('2010-10-24 10:20:30','User1','test','18700001111','User1');";
+            //指定检索字段
             stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet genKeys = stmt.getGeneratedKeys();
             if(genKeys.next()) {

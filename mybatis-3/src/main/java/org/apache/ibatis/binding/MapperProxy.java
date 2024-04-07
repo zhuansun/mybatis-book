@@ -51,6 +51,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
       if (Object.class.equals(method.getDeclaringClass())) {
         return method.invoke(this, args);
       } else if (isDefaultMethod(method)) {
+        //是否是默认方法（jdk8提供的接口也可以有方法实现体），这里也略过，不是我们关注的重点
         return invokeDefaultMethod(proxy, method, args);
       }
     } catch (Throwable t) {
@@ -58,6 +59,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     }
     // 对Mapper接口中定义的方法进行封装，生成MapperMethod对象
     final MapperMethod mapperMethod = cachedMapperMethod(method);
+    // 最后调用了 MapperMethod 的 execute 方法
     return mapperMethod.execute(sqlSession, args);
   }
 

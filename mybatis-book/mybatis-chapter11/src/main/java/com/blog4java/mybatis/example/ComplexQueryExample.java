@@ -49,12 +49,20 @@ public class ComplexQueryExample {
         List<Order> orders = orderMapper.listOrdersByUserId(1L);
         System.out.println(JSON.toJSONString(orders));
     }
+
+    /**
+     * 测试简单的单表查询
+     */
     @Test
     public void testGetUserByIdForUserDetailMap() {
         User user = userMapper.getUserByIdForUserDetailMap(1L);
         System.out.println(JSON.toJSONString(user));
     }
 
+
+    /**
+     * 级联查询：男性不查询订单，女性查询订单
+     */
     @Test
     public void testGetUserByIdForDiscriminator() {
         User femaleUser = userMapper.getUserByIdForDiscriminator(2L);
@@ -62,6 +70,17 @@ public class ComplexQueryExample {
         User maleUser = userMapper.getUserByIdForDiscriminator(1L);
         System.out.println(JSON.toJSONString(maleUser));
     }
+
+
+    /**
+     * 级联查询：女性查询订单
+     */
+    @Test
+    public void testGetUserByIdForDiscriminatorFemale() {
+        User femaleUser = userMapper.getUserByIdForDiscriminator(2L);
+        System.out.println(JSON.toJSONString(femaleUser));
+    }
+
 
     @Test
     public void testGetUserByIdForJoin() {

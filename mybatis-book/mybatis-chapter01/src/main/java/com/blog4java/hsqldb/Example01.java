@@ -20,8 +20,7 @@ public class Example01 {
             // 加载HSQLDB驱动
             Class.forName("org.hsqldb.jdbcDriver");
             // 获取Connection对象
-            conn = DriverManager.getConnection("jdbc:hsqldb:mem:mybatis",
-                    "sa", "");
+            conn = DriverManager.getConnection("jdbc:hsqldb:mem:mybatis", "sa", "");
             // 使用Mybatis的ScriptRunner工具类执行数据库脚本
             ScriptRunner scriptRunner = new ScriptRunner(conn);
             scriptRunner.setLogWriter(null);
